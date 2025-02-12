@@ -66,6 +66,4 @@ int main() {
                 cout << "Invalid input! Please enter a valid choice." << endl;
         }
     } while (choice != 0);
-
-    return 0;
 }
