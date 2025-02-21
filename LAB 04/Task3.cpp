@@ -28,7 +28,7 @@ class Car{
         Brand = r.Brand;
         Availability = r.Availability;
     }
-
+    ~Car();
     bool Rent(){
         if(Availability == true){
             Availability = false;
