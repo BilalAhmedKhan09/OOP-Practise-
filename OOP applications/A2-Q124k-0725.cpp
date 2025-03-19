@@ -4,18 +4,17 @@ using namespace std;
 class Stop;
 class Bus;
 
-class Student {
+class Passenger {
+    protected:
     string name;
     bool feePaid;
-    int studentID;
     bool isActive;
     Stop* assignedStop; 
     Bus* assignedBus;
 
 public:
-    Student(string n, int id) {
+    Passenger(string n) {
         name = n;
-        studentID = id;
         feePaid = false;
         isActive = false;
         assignedStop = nullptr;
@@ -55,6 +54,26 @@ public:
     }
 };
 
+class Faculty: public Passenger{
+    int FacultyID;
+    public:
+    Faculty(string n, int id): Passenger(n), FacultyID(id){}
+    void payFee(){
+        cout<<"Monthly payment. ";
+        Passenger::payFee();
+    }
+};
+
+class Student: public Passenger{
+    int StudentID;
+    public:
+    Student(string n, int id): Passenger(n), StudentID(id){}
+    void payFee(){
+        cout<<"Semester transport fee. ";
+        Passenger::payFee();
+    }
+};
+
 class Stop {
     string stopName;
 
@@ -73,30 +92,57 @@ class Bus {
     Stop* stops[5];  
     int stopCount;
     int attendance; 
-    Student* students[10];  
+    Student* students[15];  
+    Faculty* faculties[5];  
     int studentCount;
+    int facultyCount;
 public:
     Bus(string name) {
         busName = name;
         stopCount = 0;
         attendance = 0;
         studentCount = 0;
-        for(int i=0;i<5;i++){
-            students[i] = nullptr;
-        }
+        facultyCount = 0;
         for(int i=0;i<5;i++){
             stops[i] = nullptr;
         }
     }
-
+    bool operator==(const Bus& bus) const {
+        if (bus.stopCount != stopCount) {
+            return false;
+        }
+        for (int i = 0; i < stopCount; i++) {
+            if (bus.stops[i]->getStopName() != stops[i]->getStopName()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    void CheckDuplication(Bus *bus) {
+        if(*this == *bus) {
+            cout<<"Similar bus already exists"<<endl;
+            delete this;
+        }
+    }
     void addStudent(Student* student) {
-        if (studentCount < 10) {
+        if (studentCount < 15) {
             students[studentCount] = student;
             student->assignBus(this);
             cout << student->getName() << " assigned to Bus: " << busName << endl;
             studentCount++;
         } else {
             cout << "Bus is full, cannot assign more students."<<endl;
+        }
+    }
+
+    void addFaculty(Faculty* faculty) {
+        if (facultyCount < 5) {
+            faculties[facultyCount] = faculty;
+            faculty->assignBus(this);
+            cout << faculty->getName() << " assigned to Bus: " << busName << endl;
+            facultyCount++;
+        } else {
+            cout << "Bus is full, cannot assign more faculty members."<<endl;
         }
     }
 
@@ -127,7 +173,7 @@ void Bus::increaseAttendace(){
     attendance++;
 }
 
-void Student::tapCard(){
+void Passenger::tapCard(){
     if (isActive) {
         cout << name << " tapped the card. Attendance marked."<<endl;
         assignedBus->increaseAttendace(); 
@@ -136,21 +182,23 @@ void Student::tapCard(){
     cout << name << " cannot board the bus. Card is inactive."<<endl;
 }
 
-
 int main() {
     Bus bus1("Bus 1");
     Stop stop1("Stop A");
     Stop stop2("Stop B");
     Student student1("Alice", 101);
-    Student student2("Bob", 102);
+    Faculty faculty1("Bob", 202);
     bus1.addStudent(&student1);
-    bus1.addStudent(&student1);
+    bus1.addFaculty(&faculty1);
     bus1.addStop(&stop1);
     bus1.addStop(&stop2);
-    student1.assignBus(&bus1);
-    student2.assignBus(&bus1);
     student1.payFee();
     student1.tapCard();
-    student2.tapCard();
+    faculty1.tapCard();
     bus1.displayAttendance();
+
+    Bus bus2("Bus 2");
+    bus2.addStop(&stop1);
+    bus2.addStop(&stop2);
+    bus2.CheckDuplication(&bus1);
 }
