@@ -92,7 +92,11 @@ private:
     Ghost* Ghosts[3];
     int GhostCount;
 public:
-    HauntedHouse(string name) : HouseName(name), GhostCount(0) {}
+    HauntedHouse(string name) : HouseName(name), GhostCount(0) {
+        for(int i=0;i<3;i++){
+            Ghosts[i] = nullptr;
+        }
+    }
 
     void addGhost(Ghost* ghost) {
         if (GhostCount < 3) {
@@ -103,6 +107,12 @@ public:
     }
 
     friend void visit(Visitor visitors[], int visitorCount, HauntedHouse& house);
+    
+    ~HauntedHouse(){
+        for(int i=0;i<3;i++){
+            delete Ghosts[i];
+        }
+    }
 };
 
 void visit(Visitor visitors[], int visitorCount, HauntedHouse& house) {
