@@ -186,7 +186,6 @@ class Professor : public User{
 };
 
 int main() {
-    cout<<"24k_0725"<<endl;
     User user1("John Doe", 1001, "john@example.com", "password123", "Full lab access", "N/A");
 
     Student student1("Jane Smith", 1002, "jane@example.com", "studentpass", "Submit assignment", "N/A");

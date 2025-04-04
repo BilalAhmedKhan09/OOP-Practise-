@@ -149,7 +149,6 @@ bool ResolveConflict(RamzanDrone& v1, RamzanHyperpod& v2, int distance){
 }
 
 int main() {
-    cout<<"24k_0725"<<endl;
     RamzanDrone drone(301);
     RamzanTimeShip timeShip(101);
     RamzanHyperpod hyperpod(201);

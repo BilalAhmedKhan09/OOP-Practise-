@@ -125,7 +125,6 @@ void visit(Visitor visitors[], int visitorCount, HauntedHouse& house) {
 }
 
 int main() {
-    cout<<"24k_0725"<<endl;
     Visitor visitors[] = { Visitor("Tom", 3), Visitor("Sarah", 6), Visitor("James", 9) };
     int visitorCount = 3;
 

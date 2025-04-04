@@ -183,7 +183,6 @@ void Passenger::tapCard(){
 }
 
 int main() {
-    cout<<"24k_0725"<<endl;
     Bus bus1("Bus 1");
     Stop stop1("Stop A");
     Stop stop2("Stop B");
