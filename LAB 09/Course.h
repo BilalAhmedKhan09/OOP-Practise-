@@ -10,5 +10,4 @@ protected:
     Course(string code, int credits) : Coursecode(code), credits(credits) {}
     virtual void calculateGrade() = 0; 
     virtual void display() = 0; 
-    virtual ~Course() {}
 };

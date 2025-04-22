@@ -6,15 +6,15 @@ void LabCourse::calculateGrade(){
     cin >> marks;
     cout<< "your grade is: ";
     if (marks >= 90)
-        cout << "Grade: A+" << endl;
+        cout << "A+" << endl;
     else if (marks >= 80)
-        cout << "Grade: A" << endl;
+        cout << "A" << endl;
     else if (marks >= 70)
-        cout << "Grade: B" << endl;
+        cout << "B" << endl;
     else if (marks >= 60)
-        cout << "Grade: C" << endl;
+        cout << "C" << endl;
     else
-        cout << "Grade: D" << endl;
+        cout << "D" << endl;
 }
 
 void LabCourse::display(){
