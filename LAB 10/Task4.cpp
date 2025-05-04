@@ -25,14 +25,19 @@ int main() {
             getline(ss, year, ',');
             getline(ss, extraData, ',');
             getline(ss, certification, ',');
-            cout << "Type: " << type << endl;
-            cout << "ID: " << id << endl;
-            cout << "Name: " << name << endl;
-            cout << "Year: " << year << endl;
-            cout << "ExtraData: " << extraData << endl;
-            cout << "Certification: " << certification << endl;
-            cout <<""<< endl;
-        }
+            size_t colonPos = extraData.find(':');
+            if (colonPos == string::npos) {
+                cout << "Error: ':' not found in ExtraData\n";
+                continue;
+            }
+            if(extraData == "ElectricVehicle"){
+                int batterycapacity = stoi(extraData.substr(colonPos+1));
+                cout << "Battery Capacity: " << batterycapacity << endl;
+            }    
+            if(extraData == "AutonomousCar"){
+                float version = stof(extraData.substr(colonPos+1));
+                cout << "Software Version: " << version << endl;
+            }    
         file.close();
     }
 }

@@ -25,14 +25,18 @@ int main() {
             getline(ss, year, ',');
             getline(ss, extraData, ',');
             getline(ss, certification, ',');
+            int result;
+            if(!(result == stoi(year))){
+                cout<<"Could not convert stoi"<<endl;
+            }
             cout << "Type: " << type << endl;
             cout << "ID: " << id << endl;
             cout << "Name: " << name << endl;
-            cout << "Year: " << year << endl;
+            cout << "Year: " << result << endl;
             cout << "ExtraData: " << extraData << endl;
             cout << "Certification: " << certification << endl;
             cout <<""<< endl;
         }
-        file.close();
     }
+    file.close();
 }
