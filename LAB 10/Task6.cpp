@@ -31,7 +31,9 @@ void read(Item &item){
 int main(){
     Item item;
     item.ID = 123;
-    strncpy(item.Name, "Product", sizeof(item.Name) - 1);
+    string s;
+    cin>>s;
+    strncpy(item.Name,s.c_str(), sizeof(item.Name) - 1);
     item.Name[sizeof(item.Name) - 1] = '\0';
     write(item);
     Item item2;
